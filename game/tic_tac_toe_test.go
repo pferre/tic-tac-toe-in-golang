@@ -1,6 +1,7 @@
 package game
 
 import (
+	"github.com/google/go-cmp/cmp"
 	"testing"
 )
 
@@ -8,24 +9,24 @@ func TestTicTacToe(t *testing.T)  {
 	t.Run("x plays first", func(t *testing.T) {
 		got := runGame()
 		expected :=  GameState{
-			nextPlayer: "X",
-			status: "on",
+			NextPlayer: "X",
+			Status:     "on",
 		}
 
-		if got.nextPlayer != expected.nextPlayer {
-			t.Errorf("got %s, want %s expected", got.nextPlayer, expected.nextPlayer)
+		if ! cmp.Equal(got, expected) {
+			t.Errorf("got %s, want %s expected", got, expected)
 		}
 	})
 }
 
 type GameState struct {
-	nextPlayer string
-	status string
+	NextPlayer string
+	Status     string
 }
 
-func runGame() *GameState {
-	return &GameState{
-		nextPlayer: "X",
-		status: "on",
+func runGame() GameState {
+	return GameState{
+		NextPlayer: "X",
+		Status:     "on",
 	}
 }
